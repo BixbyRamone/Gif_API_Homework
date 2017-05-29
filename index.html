@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Gif assignment</title>
+
+	<!-- <script type="text/javascript" src="javascript/javascript.js"></script> -->
+	
+	<script src="https://code.jquery.com/jquery.js"></script>
+
+	<link rel="stylesheet" type="text/css" href="assets/css/reset.css">
+	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+</head>
+<body>
+	<div id="animalButtons">
+		
+	</div>
+
+
+	<form>
+		<label for="animal-input">Add an Animal</label>
+		<input type="text" id="animal-input" value="New Animal"><br>
+
+		<input type="submit" id="addAnimal" value="submit">
+	</form>
+
+	<div id="animals"></div>
+
+	<div class="testSpot"></div>
+
+	<script type="text/javascript">
+		$(document).ready(function() { 
+
+			var aniName = "cat";
+			var key = "&api_key=dc6zaTOxFJmzC";
+			var api = "http://api.giphy.com/v1/gifs/search?q=";
+			var queryurl =  api + aniName + key;
+
+			queryurl = queryurl.replace(" ", "+");
+
+			var animals = ["dog", "cat", "rabbit", "hamster", "skunk", "goldfish"];
+
+			console.log(queryurl);
+
+			$.ajax({
+				url: queryurl, 
+				method: 'GET'
+			})
+			.done(function(response) {
+				console.log( response );
+			})
+
+			console.log(animals);
+
+			function renderButtons() {
+				$('#animalButtons').empty();
+
+				for (var i = 0; i < animals.length; i++) {
+
+					$('#animalButtons').append('<button>' + animals[i] + '</button>');
+				}
+
+			}
+
+			$('#addAnimal').on('click', function() {
+				event.preventDefault();
+
+				var userInput = $('#animal-input').val();
+
+				animals.push(userInput);
+
+				renderButtons();
+			})
+
+			$('#animalButtons').on('click', function(event) {
+					
+			})
+
+
+
+			
+			
+
+	//$(document).on('click', ".gif-class", gifrunfunction);  for dynamically added clicks.
+	// public beta api key dc6zaTOxFJmzC
+	// http://api.giphy.com/v1/gifs/search?q=funny+cat&api_key=dc6zaTOxFJmzC   
+	// api.giphy.com
+	// path /v1/gifs/search
+	// gotData(queryurl);
+
+
+
+	renderButtons();
+});
+	</script>
+
+</body>
+</html>
