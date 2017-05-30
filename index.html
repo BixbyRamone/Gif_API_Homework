@@ -52,9 +52,24 @@
 				url: queryurl, 
 				method: 'GET'
 			})
+
 			.done(function(response) {
 				console.log( response );
+
+				
+
+				for (var i = 0; i < 10; i++) {
+					
+					$(newImg).attr('src', response.data[i].images.preview_gif.url);
+
+				var newImg = $("<img/>");
+
+				$('#animals').append(newImg);
+
+				}
 			})
+
+
 
 			console.log(animals);
 
@@ -78,9 +93,9 @@
 				renderButtons();
 			})
 
-			$('#animalButtons').on('click', function(event) {
+			// $('#animalButtons').on('click', function(event) {
 					
-			})
+			// })
 
 
 
