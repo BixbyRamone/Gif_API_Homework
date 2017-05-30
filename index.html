@@ -37,38 +37,44 @@
 	<script type="text/javascript">
 		$(document).ready(function() { 
 
-			var aniName = "cat";
-			var key = "&api_key=dc6zaTOxFJmzC";
-			var api = "http://api.giphy.com/v1/gifs/search?q=";
-			var queryurl =  api + aniName + key;
-
-			queryurl = queryurl.replace(" ", "+");
-
 			var animals = ["dog", "cat", "rabbit", "hamster", "skunk", "goldfish"];
+			// var aniName = "cat";
+			
 
-			console.log(queryurl);
+			// console.log(queryurl);
 
-			$.ajax({
-				url: queryurl, 
-				method: 'GET'
-			})
+			
 
-			.done(function(response) {
-				console.log( response );
+			$('#animalButtons').on('click', 'button', function(event) {
 
-				
+				var aniName = $(this).html();
+				var key = "&api_key=dc6zaTOxFJmzC";
+				var api = "http://api.giphy.com/v1/gifs/search?q=";
+				var queryurl =  api + aniName + key;
 
-				for (var i = 0; i < 10; i++) {
-					
-					$(newImg).attr('src', response.data[i].images.preview_gif.url);
+				queryurl = queryurl.replace(" ", "+");
 
-				var newImg = $("<img/>");
+				console.log("this: " + aniName);
 
-				$('#animals').append(newImg);
+				$.ajax({
+					url: queryurl, 
+					method: 'GET'
+				})
 
-				}
-			})
+				.done(function(response) {
+					console.log( response );				
 
+					for (var i = 0; i < 10; i++) {
+
+						var newImg = $("<img/>");
+						
+						$(newImg).attr('src', response.data[i].images.preview_gif.url);				
+
+						$('#animals').append(newImg);
+
+					}
+				})
+			});
 
 
 			console.log(animals);
